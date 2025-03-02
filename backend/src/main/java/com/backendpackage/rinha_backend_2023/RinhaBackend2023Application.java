@@ -8,6 +8,7 @@ public class RinhaBackend2023Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RinhaBackend2023Application.class, args);
+		System.out.println(org.hibernate.Version.getVersionString());
 	}
 
 }
