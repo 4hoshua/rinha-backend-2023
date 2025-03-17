@@ -1,49 +1,40 @@
-package com.rinhapackage.rinha_backend_2023.entities;
+package com.rinhapackage.rinha_backend_2023.dto;
 
-import jakarta.persistence.*;
+import com.rinhapackage.rinha_backend_2023.entities.People;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "Pessoas")
+public class PeopleDTO {
 
-public class People {
-
-    @Id
-    @Column(unique = true, nullable = false)
     private UUID id;
-
-    @Column(name = "nome", nullable = false, length = 100)
     private String name;
-
-    @Column(name = "nascimento", nullable = false)
     private Date birthDate;
-
-    @Column(name = "apelido", nullable = false)
     private String nick;
+    private List<String> Stack = new ArrayList<>();
 
-    @ElementCollection
-    private List<String> stack = new ArrayList<>();
+    public PeopleDTO() {}
 
-    public People() {}
-
-    public People(UUID id, String name, Date birthDate, String nick, List<String> stack) {
+    public PeopleDTO(UUID id, String name, Date birthDate, String nick, List<String> stack) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.nick = nick;
-        this.stack = stack;
     }
 
-    public List<String> getStack() {
-        return stack;
+    public PeopleDTO(People entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.birthDate = entity.getBirthDate();
+        this.nick = entity.getNick();
     }
 
-    public void setStack(List<String> stack) {this.stack = stack;}
+    public PeopleDTO(People entity, List<String> stack) {
+        this(entity);
+        Stack.addAll(stack);
+    }
 
     public UUID getId() {return id;}
 
@@ -60,4 +51,8 @@ public class People {
     public String getNick() {return nick;}
 
     public void setNick(String nick) {this.nick = nick;}
+
+    public List<String> getStack() {return Stack;}
+
+    public void setStack(List<String> stack) {Stack = stack;}
 }
