@@ -1,0 +1,1 @@
+Implementação feita em Java com Spring Boot da [Rinha de BackEnd 2023](https://github.com/zanfranceschi/rinha-de-backend-2023-q3) feita com o objetivo de praticar conceitos referentes a API, otimização, etc.
