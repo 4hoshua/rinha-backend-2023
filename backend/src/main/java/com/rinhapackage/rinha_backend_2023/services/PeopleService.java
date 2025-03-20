@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +18,26 @@ public class PeopleService {
 
     @Autowired
     private PeopleRepository peopleRepository;
+
+    @Transactional
+    public PeopleDTO insert(PeopleDTO dto) {
+        People entity = new People();
+
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setNick(dto.getNick());
+        entity.setBirthDate(dto.getBirthDate());
+
+        entity.getStack().clear();
+
+        for (String stack : dto.getStack()) {
+            entity.getStack().add(stack);
+        }
+
+        entity = peopleRepository.save(entity);
+
+        return new PeopleDTO(entity);
+    }
 
     @Transactional(readOnly = true)
     public PeopleDTO findById(UUID id) {
