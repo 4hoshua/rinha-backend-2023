@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,4 +47,12 @@ public class PeopleService {
         return new PeopleDTO(people, people.getStack());
     }
 
+    @Transactional(readOnly = true)
+    public PeopleDTO findByName(String nome) {
+        UUID uuid = peopleRepository.findByName(nome);
+        Optional<People> entity = peopleRepository.findById(uuid);
+
+        People people = entity.get();
+        return new PeopleDTO(people, people.getStack());
+    }
 }

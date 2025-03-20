@@ -20,8 +20,14 @@ public class PeopleResource {
     private PeopleService peopleService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PeopleDTO> findById(@PathVariable UUID id) {
+    public ResponseEntity<PeopleDTO> findByName(@PathVariable UUID id) {
         PeopleDTO people = peopleService.findById(id);
+        return ResponseEntity.ok().body(people);
+    }
+
+    @GetMapping(value = "nome/{nome}")
+    public ResponseEntity<PeopleDTO> findByName(@PathVariable String nome) {
+        PeopleDTO people = peopleService.findByName(nome);
         return ResponseEntity.ok().body(people);
     }
 
